@@ -95,7 +95,7 @@ foreign unsafe import jvm "method end"
  */
 data public MatchResult = 
     private MatchResult
-        boundries :: !(Array Int)
+        boundaries :: !(Array Int)
         ;
 
 /**
@@ -103,7 +103,7 @@ data public MatchResult =
  */
 matchResultSize :: MatchResult -> Int;
 public matchResultSize !matchResult = 
-    (Array.length matchResult.MatchResult.boundries) / 2;
+    (Array.length matchResult.MatchResult.boundaries) / 2;
 
 /**
  * The group of characters matched
@@ -119,19 +119,19 @@ public matchResultGroup !string !group !matchResult =
  * The start index (within the original string) of the nth group
  */
 public matchResultStart matchResult group = 
-    Array.subscript matchResult.MatchResult.boundries (group/2);
+    Array.subscript matchResult.MatchResult.boundaries (group*2);
 
 /**
  * The end index (within the original string) of the nth group
  */
 public matchResultEnd matchResult group = 
-    Array.subscript matchResult.MatchResult.boundries (group/2+1);
+    Array.subscript matchResult.MatchResult.boundaries (group*2+1);
 
 /**
- * Get the boundries of the match result as a list 
+ * Get the boundaries of the match result as a list 
  */
 public matchResultBoundries matchResult = 
-    Array.toList matchResult.MatchResult.boundries;
+    Array.toList matchResult.MatchResult.boundaries;
 
 /**
  * Make the MatchResult showable
@@ -142,7 +142,7 @@ instance Show MatchResult where
 
 // function to show a MatchResult used in making implement show 
 showMatchResult !matchResult = 
-    show matchResult.MatchResult.boundries;
+    show matchResult.MatchResult.boundaries;
 
 /**
  * A compiled regular expression used for matching the contents with Strings 
